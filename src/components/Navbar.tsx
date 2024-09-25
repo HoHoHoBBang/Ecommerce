@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between py-5">
       <Link to="/">
-        <p className="text-3xl font-bold md:text-4xl">
+        <p className="text-3xl font-bold sm:text-4xl">
           LOGO<span className="text-yellow-500">.</span>
         </p>
       </Link>
@@ -58,7 +58,7 @@ const Navbar = () => {
         </div>
         <Link to="/cart" className="relative cursor-pointer">
           <FontAwesomeIcon icon={faCartShopping} className="text-lg" />
-          <p className="absolute -right-1.5 -top-1.5 flex aspect-square h-4 w-4 items-center justify-center rounded-full bg-black text-[9px] text-white">
+          <p className="absolute -right-1.5 -top-1.5 flex aspect-square h-4 w-4 items-center justify-center rounded-full border border-white bg-black text-[9px] text-white">
             10
           </p>
         </Link>
