@@ -31,7 +31,11 @@ const NewArrivals = () => {
               key={items.id}
               className="flex flex-col items-center justify-center transition-all ease-in-out hover:scale-110"
             >
-              <img src={items.image[0]} alt="" className="w-full" />
+              <img
+                src={items.image[0]}
+                alt=""
+                className="h-40 w-full overflow-hidden rounded-xl object-cover sm:h-52"
+              />
               <div className="flex w-full flex-col justify-start">
                 <p className="font-bold">{items.name}</p>
                 <p className="text-lg font-bold">
