@@ -6,11 +6,13 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { shopContext } from "../context/shopContext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const { setShowSearchBar, cartItemCount } = useContext(shopContext);
 
   return (
     <div className="flex items-center justify-between py-5">
@@ -44,12 +46,16 @@ const Navbar = () => {
 
       <div className="flex items-center gap-5">
         <div className="cursor-pointer">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg" />
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="text-lg"
+            onClick={() => setShowSearchBar(true)}
+          />
         </div>
         <div className="group relative cursor-pointer">
           <FontAwesomeIcon icon={faUser} className="text-lg" />
           <div className="absolute right-0 hidden pt-3 group-hover:block">
-            <div className="flex w-32 flex-col gap-2 rounded bg-gray-50 px-3 py-5 text-gray-500">
+            <div className="flex w-32 flex-col gap-2 rounded border bg-white px-3 py-5 text-gray-500">
               <p className="cursor-pointer hover:text-black">My Profile</p>
               <p className="cursor-pointer hover:text-black">Orders</p>
               <p className="cursor-pointer hover:text-black">Logout</p>
@@ -59,7 +65,7 @@ const Navbar = () => {
         <Link to="/cart" className="relative cursor-pointer">
           <FontAwesomeIcon icon={faCartShopping} className="text-lg" />
           <p className="absolute -right-1.5 -top-1.5 flex aspect-square h-4 w-4 items-center justify-center rounded-full border border-white bg-black text-[9px] text-white">
-            10
+            {cartItemCount()}
           </p>
         </Link>
         <div

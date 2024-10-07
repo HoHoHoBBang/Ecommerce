@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { shopContext } from "../context/shopContext";
 import { productsProps } from "../assets/assets";
 import { Link } from "react-router-dom";
+import ProductItems from "./ProductItems";
 
 const NewArrivals = () => {
   const { products, currency } = useContext(shopContext);
@@ -26,32 +27,25 @@ const NewArrivals = () => {
       <div className="my-5 grid grid-cols-2 gap-5 md:grid-cols-4">
         {newProducts.map((items) => {
           return (
-            <Link
-              to={`/products/${items.id}`}
+            <ProductItems
               key={items.id}
-              className="flex flex-col items-center justify-center transition-all ease-in-out hover:scale-110"
-            >
-              <img
-                src={items.image[0]}
-                alt=""
-                className="h-40 w-full overflow-hidden rounded-xl object-cover sm:h-52"
-              />
-              <div className="flex w-full flex-col justify-start">
-                <p className="font-bold">{items.name}</p>
-                <p className="text-lg font-bold">
-                  {currency}
-                  {items.price}
-                </p>
-              </div>
-            </Link>
+              id={items.id}
+              image={items.image}
+              name={items.name}
+              price={items.price}
+              currency={currency}
+            />
           );
         })}
       </div>
 
       <div className="flex items-center justify-center py-5">
-        <button className="flex h-10 w-36 items-center justify-center rounded-full bg-black text-white">
+        <Link
+          to="/new-arrivals"
+          className="flex h-10 w-full items-center justify-center rounded-full border border-black hover:bg-black hover:text-white sm:w-36"
+        >
           View All
-        </button>
+        </Link>
       </div>
       <hr className="my-5 h-[1.5px] w-full border-none bg-gray-100" />
     </div>

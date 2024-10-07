@@ -1,5 +1,6 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -26,9 +27,12 @@ const Hero = () => {
           </div>
 
           <div className="flex w-full items-start">
-            <button className="flex h-10 w-36 items-center justify-center rounded-full bg-black text-white">
+            <Link
+              to="/collection"
+              className="flex h-10 w-36 items-center justify-center rounded-full bg-black text-white"
+            >
               Shop Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>

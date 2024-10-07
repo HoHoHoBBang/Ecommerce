@@ -17,11 +17,11 @@ const NewsletterBox = () => {
       >
         <input
           type="email"
-          className="w-3/4 rounded-lg border px-2 py-1 outline-none sm:w-1/3"
+          className="w-4/5 rounded-full border px-3 py-1 outline-none sm:w-1/3"
           placeholder="Enter your email"
           required
         />
-        <button className="flex h-10 w-36 items-center justify-center rounded-full bg-white text-black">
+        <button className="flex h-9 w-4/5 items-center justify-center rounded-full bg-white text-black sm:w-36">
           SUBSCRIBE
         </button>
       </form>
