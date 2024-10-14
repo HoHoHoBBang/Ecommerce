@@ -1,10 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { shopContext } from "../context/shopContext";
 import ProductItems from "./ProductItems";
+import { productsProps } from "../assets/assets";
 
-const RelatedProducts = ({ id, category, subCategory }) => {
+interface Props {
+  id: string;
+  category: string;
+  subCategory: string;
+}
+
+const RelatedProducts = ({ id, category, subCategory }: Props) => {
   const { products, currency } = useContext(shopContext);
-  const [relatedProduct, setRelatedProduct] = useState([]);
+  const [relatedProduct, setRelatedProduct] = useState<productsProps[]>([]);
 
   useEffect(() => {
     if (products.length > 0) {

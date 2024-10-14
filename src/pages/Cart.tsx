@@ -1,8 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { shopContext } from "../context/shopContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faMinus, faPlus, faTag } from "@fortawesome/free-solid-svg-icons";
+
+interface cartDataType {
+  id: string;
+  size: string;
+  quantity: number;
+}
 
 const Cart = () => {
   const {
@@ -14,7 +20,7 @@ const Cart = () => {
     cartItemAmount,
   } = useContext(shopContext);
 
-  const [cartData, setCartData] = useState([]);
+  const [cartData, setCartData] = useState<cartDataType[]>([]);
 
   useEffect(() => {
     const tempData = [];

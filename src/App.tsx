@@ -7,6 +7,9 @@ import SearchBar from "./components/SearchBar";
 import Product from "./pages/Product";
 import NewsletterBox from "./components/NewsletterBox";
 import Cart from "./pages/Cart";
+import NewArrivals from "./pages/NewArrivals";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />
+        <Route path="/new-arrivals" element={<NewArrivals />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>

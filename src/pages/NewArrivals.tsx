@@ -1,18 +1,17 @@
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { shopContext } from "../context/shopContext";
 import ProductItems from "../components/ProductItems";
 import { productsProps } from "../assets/assets";
 
-const Collection = () => {
+const NewArrivals = () => {
   const { products, currency, search, showSearchBar } = useContext(shopContext);
 
   const [visible, setVisible] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState<productsProps[]>([]);
   const [category, setCategory] = useState<string[]>([]);
   const [subCategory, setSubCategory] = useState<string[]>([]);
-  const [sortType, setSortType] = useState("relevant");
 
   const categotyToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (category.includes(e.target.value)) {
@@ -54,29 +53,9 @@ const Collection = () => {
     setFilteredProducts(productsCopy);
   };
 
-  const productSort = () => {
-    const productCopy = filteredProducts;
-
-    switch (sortType) {
-      case "low-high":
-        setFilteredProducts(productCopy.sort((a, b) => a.price - b.price));
-        break;
-      case "high-low":
-        setFilteredProducts(productCopy.sort((a, b) => b.price - a.price));
-        break;
-      default:
-        productFilter();
-        break;
-    }
-  };
-
   useEffect(() => {
     productFilter();
   }, [category, subCategory, search, showSearchBar]);
-
-  useEffect(() => {
-    productSort();
-  }, [sortType]);
 
   return (
     <div className="flex flex-col pb-10 sm:flex-row">
@@ -152,42 +131,30 @@ const Collection = () => {
         <div className="flex w-full justify-between py-8">
           <div className="flex flex-col items-start gap-2">
             <p className="text-center text-2xl font-bold sm:text-3xl">
-              COLLECTION
+              NEW ARRIVALS
             </p>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <p className="hidden text-sm sm:block">Sort By :</p>
-            <select
-              name=""
-              id=""
-              className="rounded border text-sm outline-none"
-              onChange={(e) => setSortType(e.target.value)}
-            >
-              <option value="relevant">Relevant</option>
-              <option value="low-high">Low to High</option>
-              <option value="high-low">High to Low</option>
-            </select>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {filteredProducts.map((items) => {
-            return (
-              <ProductItems
-                key={items.id}
-                id={items.id}
-                image={items.image}
-                name={items.name}
-                price={items.price}
-                currency={currency}
-              />
-            );
-          })}
+          {filteredProducts
+            .sort((a, b) => b.date - a.date)
+            .map((items) => {
+              return (
+                <ProductItems
+                  key={items.id}
+                  id={items.id}
+                  image={items.image}
+                  name={items.name}
+                  price={items.price}
+                  currency={currency}
+                />
+              );
+            })}
         </div>
       </div>
     </div>
   );
 };
 
-export default Collection;
+export default NewArrivals;

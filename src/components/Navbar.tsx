@@ -6,7 +6,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { shopContext } from "../context/shopContext";
 

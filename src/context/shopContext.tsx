@@ -1,5 +1,11 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import { products, productsProps } from "../assets/assets";
+
+interface CartItemsType {
+  [key: string]: {
+    [size: string]: number;
+  };
+}
 
 interface ShopContextType {
   products: productsProps[];
@@ -10,6 +16,10 @@ interface ShopContextType {
   showSearchBar: boolean;
   setShowSearchBar: React.Dispatch<React.SetStateAction<boolean>>;
   addToCart: (itemId: string, size: string, quantity: number) => void;
+  updateQuantity: (itemId: string, size: string, quantity: number) => void;
+  cartItemCount: () => number;
+  cartItemAmount: () => number;
+  cartItems: CartItemsType;
 }
 
 interface Props {
@@ -25,6 +35,10 @@ const initialState: ShopContextType = {
   showSearchBar: false,
   setShowSearchBar: () => {},
   addToCart: () => {},
+  updateQuantity: () => {},
+  cartItemCount: () => 0,
+  cartItemAmount: () => 0,
+  cartItems: {},
 };
 
 export const shopContext = createContext<ShopContextType>(initialState);
@@ -32,13 +46,13 @@ export const shopContext = createContext<ShopContextType>(initialState);
 const ShopContextProvider = ({ children }: Props) => {
   const [search, setSearch] = useState("");
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState<CartItemsType>({});
 
   const currency = "₩";
   const deliveryCost = 3000;
 
-  const addToCart = (itemId, size, quantity) => {
-    let cartData = structuredClone(cartItems);
+  const addToCart = (itemId: string, size: string, quantity: number) => {
+    const cartData = structuredClone(cartItems);
 
     if (cartData[itemId]) {
       if (cartData[itemId][size]) {
@@ -54,8 +68,8 @@ const ShopContextProvider = ({ children }: Props) => {
     setCartItems(cartData);
   };
 
-  const updateQuantity = (itemId, size, quantity) => {
-    let cartData = structuredClone(cartItems);
+  const updateQuantity = (itemId: string, size: string, quantity: number) => {
+    const cartData = structuredClone(cartItems);
 
     if (quantity === 0) {
       cartData[itemId][size] = quantity;
@@ -66,7 +80,7 @@ const ShopContextProvider = ({ children }: Props) => {
     setCartItems(cartData);
   };
 
-  const cartItemCount = () => {
+  const cartItemCount = (): number => {
     let totalCount = 0;
 
     for (const items in cartItems) {
@@ -84,7 +98,7 @@ const ShopContextProvider = ({ children }: Props) => {
     return totalCount;
   };
 
-  const cartItemAmount = () => {
+  const cartItemAmount = (): number => {
     let totalAmount = 0;
 
     for (const items in cartItems) {
@@ -93,7 +107,7 @@ const ShopContextProvider = ({ children }: Props) => {
       for (const item in cartItems[items]) {
         try {
           if (cartItems[items][item] > 0) {
-            totalAmount += itemInfo?.price * cartItems[items][item];
+            totalAmount += (itemInfo?.price || 0) * cartItems[items][item];
           }
         } catch (error) {
           console.log(error);

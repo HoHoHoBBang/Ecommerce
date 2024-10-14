@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   return (
     <div className="flex flex-col gap-y-5 py-5 sm:flex-row">
