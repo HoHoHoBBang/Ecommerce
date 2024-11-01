@@ -1,8 +1,5 @@
 ---
 
-
----
-
 <p><strong>프로젝트: 이커머스 웹</strong></p>
 <p><strong>프로젝트 개요:</strong></p>
 <ul>
